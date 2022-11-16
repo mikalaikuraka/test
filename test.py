@@ -43,7 +43,6 @@ def check(urls):
         responce_post = requests.post(url)
         code_post = responce_post.status_code
 
-
         get(code_get, url)
 
         post(code_get, url)
