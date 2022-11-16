@@ -22,16 +22,23 @@ def connection_check(url):
 
     if code_get != 405:
         mtd = 'GET'
+        opt = requests.options(url)
+        answer = {'OPTIONS' : opt.status_code}
         status_code = {mtd : code_get}
-        status = {url : status_code}
+        answer.update(status_code)
+        status = {url : answer}
     else:
         pass
 
     if code_post != 405:
         mtd = 'POST'
+        opt = requests.options(url)
+        answer = {'OPTIONS' : opt.status_code}
         status_code = {mtd : code_post}
-        status = {url : status_code}
+        answer.update(status_code)
+        status = {url : answer}
     else:
         pass
 
-    
+
+
