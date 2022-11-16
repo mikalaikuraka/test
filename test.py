@@ -9,3 +9,13 @@ urls = [
     'https://habr.com/ru/post/593529/', 'https://pythonworld.ru/tipy-dannyx-v-python/fajly-rabota-s-fajlami.html'
     ]
 
+def connection_check(url):
+
+    url = url.strip()
+
+    responce_get = requests.get(url)
+    code_get = responce_get.status_code
+
+    responce_post = requests.post(url)
+    code_post = responce_post.status_code
+    
