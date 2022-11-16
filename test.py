@@ -1,9 +1,6 @@
 import requests
 import json
 
-
-
-
 def check(urls):
 
     log = {}
