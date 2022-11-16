@@ -18,4 +18,20 @@ def connection_check(url):
 
     responce_post = requests.post(url)
     code_post = responce_post.status_code
+
+
+    if code_get != 405:
+        mtd = 'GET'
+        status_code = {mtd : code_get}
+        status = {url : status_code}
+    else:
+        pass
+
+    if code_post != 405:
+        mtd = 'POST'
+        status_code = {mtd : code_post}
+        status = {url : status_code}
+    else:
+        pass
+
     
