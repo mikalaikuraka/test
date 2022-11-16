@@ -50,3 +50,7 @@ urls = [
 for i in range(len(urls)):
     connection_check(urls[i])
 
+with open('file.json', 'w') as f:
+    json.dump(log, f)
+
+print(log)
