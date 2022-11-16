@@ -1,9 +1,37 @@
 import requests
 import json
 
+from requests.exceptions import ConnectionError
+
 def check(urls):
 
     log = {}
+
+    def get(code_get_1,url):
+
+        if code_get_1 != 405:
+            mtd = 'GET'
+            opt = requests.options(url)
+            answer = {'OPTIONS' : opt.status_code}
+            status_code = {mtd : code_get_1}
+            answer.update(status_code)
+            status = {url : answer}
+            log.update(status)
+        else:
+            pass
+
+    def post(code_post_1, url):
+
+        if code_post_1 != 405:
+            mtd = 'POST'
+            opt = requests.options(url)
+            answer = {'OPTIONS' : opt.status_code}
+            status_code = {mtd : code_post_1}
+            answer.update(status_code)
+            status = {url : answer}
+            log.update(status)
+        else:
+            pass
 
     def connection_check(url):
 
@@ -16,30 +44,19 @@ def check(urls):
         code_post = responce_post.status_code
 
 
-        if code_get != 405:
-            mtd = 'GET'
-            opt = requests.options(url)
-            answer = {'OPTIONS' : opt.status_code}
-            status_code = {mtd : code_get}
-            answer.update(status_code)
-            status = {url : answer}
-            log.update(status)
-        else:
-            pass
+        get(code_get, url)
 
-        if code_post != 405:
-            mtd = 'POST'
-            opt = requests.options(url)
-            answer = {'OPTIONS' : opt.status_code}
-            status_code = {mtd : code_post}
-            answer.update(status_code)
-            status = {url : answer}
-            log.update(status)
-        else:
-            pass
+        post(code_get, url)
+
 
     for i in range(len(urls)):
-        connection_check(urls[i])
+        try:
+            responce = requests.get(urls[i])
+            responce.raise_for_status()
+        except ConnectionError:
+            print(f'{urls[i]} - не является ссылкой!')
+        else: 
+            connection_check(urls[i])
 
     with open('file.json', 'w') as f:
         json.dump(log, f)
@@ -47,6 +64,7 @@ def check(urls):
     print(log)
 
 urls = [
+    'http://skfgvodsjnfgsonfdvsnfvolsnfvdsofv',
     'https://en.wikipedia.org/w/index.php',
     'http://www.google.com',
     'https://pythonworld.ru/tipy-dannyx-v-python/slovari-dict-funkcii-i-metody-slovarej.html', 
