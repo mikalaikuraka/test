@@ -9,6 +9,8 @@ urls = [
     'https://habr.com/ru/post/593529/', 'https://pythonworld.ru/tipy-dannyx-v-python/fajly-rabota-s-fajlami.html'
     ]
 
+log = {}
+
 def connection_check(url):
 
     url = url.strip()
@@ -27,6 +29,7 @@ def connection_check(url):
         status_code = {mtd : code_get}
         answer.update(status_code)
         status = {url : answer}
+        log.update(status)
     else:
         pass
 
@@ -37,6 +40,7 @@ def connection_check(url):
         status_code = {mtd : code_post}
         answer.update(status_code)
         status = {url : answer}
+        log.update(status)
     else:
         pass
 
